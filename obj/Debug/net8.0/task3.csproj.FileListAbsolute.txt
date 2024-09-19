@@ -1,0 +1,14 @@
+C:\Users\aldes\source\repos\demo\task3\bin\Debug\net8.0\task3.exe
+C:\Users\aldes\source\repos\demo\task3\bin\Debug\net8.0\task3.deps.json
+C:\Users\aldes\source\repos\demo\task3\bin\Debug\net8.0\task3.runtimeconfig.json
+C:\Users\aldes\source\repos\demo\task3\bin\Debug\net8.0\task3.dll
+C:\Users\aldes\source\repos\demo\task3\bin\Debug\net8.0\task3.pdb
+C:\Users\aldes\source\repos\demo\task3\obj\Debug\net8.0\task3.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\aldes\source\repos\demo\task3\obj\Debug\net8.0\task3.AssemblyInfoInputs.cache
+C:\Users\aldes\source\repos\demo\task3\obj\Debug\net8.0\task3.AssemblyInfo.cs
+C:\Users\aldes\source\repos\demo\task3\obj\Debug\net8.0\task3.csproj.CoreCompileInputs.cache
+C:\Users\aldes\source\repos\demo\task3\obj\Debug\net8.0\task3.dll
+C:\Users\aldes\source\repos\demo\task3\obj\Debug\net8.0\refint\task3.dll
+C:\Users\aldes\source\repos\demo\task3\obj\Debug\net8.0\task3.pdb
+C:\Users\aldes\source\repos\demo\task3\obj\Debug\net8.0\task3.genruntimeconfig.cache
+C:\Users\aldes\source\repos\demo\task3\obj\Debug\net8.0\ref\task3.dll
