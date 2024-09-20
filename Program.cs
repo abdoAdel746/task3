@@ -1,5 +1,4 @@
-﻿using System.Transactions;
-
+using System.Transactions;
 namespace task3
 {
     class Book
@@ -7,101 +6,92 @@ namespace task3
         public string Title { get; set; }
         public string Author { get; set; }
         public string ISBN { get; set; }
-        public bool Availabilty { get; set; }
+        public bool Availability { get; set; }
 
-        public Book(string title, string author, string iSBN, bool availabilty=true)
+        public Book(string title, string author, string iSBN, bool availability = true)
         {
             Title = title;
             Author = author;
             ISBN = iSBN;
-            Availabilty = availabilty;
+            Availability = availability;
         }
     }
+
     class Library
     {
         List<Book> books = new List<Book>();
+
+        // Add a new book to the library
         public void AddBook(Book book)
         {
             books.Add(book);
-            Console.WriteLine("the book is added succesfully");
-
+            Console.WriteLine($"The book '{book.Title}' has been added successfully.");
         }
 
-        public string SearchBook(string book)
+        // Search for a book by Title or Author
+        public string SearchBook(string bookName)
         {
-            bool found = false;
-            for (int i = 0; i < books.Count; i++)
+            foreach (var book in books)
             {
-                if (books[i].Author.Contains(book) || books[i].Title.Contains(book))
+                if (book.Title.Contains(bookName) || book.Author.Contains(bookName))
                 {
-                    found = true;
-                    
+                    Console.WriteLine($"The book '{book.Title}' by {book.Author} is available.");
+                    return $"The book '{book.Title}' by {book.Author} is available.";
                 }
             }
-            if (found)
-            {
-                Console.WriteLine("book is found");
-
-                return "book is found";
-            }
-            else
-            {
-                Console.WriteLine("not found");
-
-                return "not found";
-            }
+            Console.WriteLine($"No book found matching '{bookName}'.");
+            return $"No book found matching '{bookName}'.";
         }
 
-        public string BorrowBook(string book)
+        // Borrow a book by Title or Author
+        public string BorrowBook(string bookName)
         {
-            bool found = false;
-            for (int i = 0; i < books.Count; i++)
+            foreach (var book in books)
             {
-                if (books[i].Author.Contains(book) || books[i].Title.Contains(book))
+                if (book.Title.Contains(bookName) || book.Author.Contains(bookName))
                 {
-                    if (books[i].Availabilty)
+                    if (book.Availability)
                     {
-                        found = true;
+                        book.Availability = false; // Mark as borrowed
+                        Console.WriteLine($"You have successfully borrowed '{book.Title}'.");
+                        return $"You have successfully borrowed '{book.Title}'.";
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Sorry, the book '{book.Title}' is currently borrowed.");
+                        return $"Sorry, the book '{book.Title}' is currently borrowed.";
                     }
                 }
             }
-            if (found)
-            {
-                Console.WriteLine("you can borrow the book");
-                return "you can borrow the book";
-            }
-            else
-            {
-                Console.WriteLine("you can't borrow the book");
-                return "you can't borrow the book";
-            }
+            Console.WriteLine($"The book '{bookName}' was not found in the library.");
+            return $"The book '{bookName}' was not found in the library.";
         }
 
-        public string ReturnBook(string book)
+        // Return a book by Title or Author
+        public string ReturnBook(string bookName)
         {
-            bool found = false;
-            for (int i = 0; i < books.Count; i++)
+            foreach (var book in books)
             {
-                if (books[i].Author.Contains(book) || books[i].Title.Contains(book))
+                if (book.Title.Contains(bookName) || book.Author.Contains(bookName))
                 {
-                  
-                        found = true;
-                    
+                    if (!book.Availability)
+                    {
+                        book.Availability = true; // Mark as available
+                        Console.WriteLine($"Thank you for returning '{book.Title}'.");
+                        return $"Thank you for returning '{book.Title}'.";
+                    }
+                    else
+                    {
+                        Console.WriteLine($"The book '{book.Title}' was not borrowed.");
+                        return $"The book '{book.Title}' was not borrowed.";
+                    }
                 }
             }
-            if (found)
-            {
-                Console.WriteLine("the book is returned");
-                return "the book is returned";
-            }
-            else
-            {
-                Console.WriteLine("the book not found");
-
-                return "the book not found";
-            }
+            Console.WriteLine($"The book '{bookName}' is not found in our library collection.");
+            return $"The book '{bookName}' is not found in our library collection.";
         }
     }
+
     internal class Program
     {
         static void Main(string[] args)
@@ -113,16 +103,22 @@ namespace task3
             library.AddBook(new Book("To Kill a Mockingbird", "Harper Lee", "9780061120084"));
             library.AddBook(new Book("1984", "George Orwell", "9780451524935"));
 
-            // Searching and borrowing books
-            Console.WriteLine("Searching and borrowing books...");
+            // Searching for books
+            Console.WriteLine("Searching for books...");
             library.SearchBook("Gatsby");
+            library.SearchBook("Harry Potter"); // This book is not in the library
+
+            // Borrowing books
+            Console.WriteLine("\nBorrowing books...");
             library.BorrowBook("1984");
+            library.BorrowBook("1984"); // Attempt to borrow again (already borrowed)
             library.BorrowBook("Harry Potter"); // This book is not in the library
 
             // Returning books
             Console.WriteLine("\nReturning books...");
-            library.ReturnBook("Gatsby");
-            library.ReturnBook("Harry Potter"); // This book is not borrowed
+            library.ReturnBook("1984");
+            library.ReturnBook("1984"); // Attempt to return again (already returned)
+            library.ReturnBook("Harry Potter"); // This book is not in the library
 
             Console.ReadLine();
         }
